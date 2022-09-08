@@ -1,0 +1,48 @@
+<!doctype><html><meta charset="utf-8"> <head> <title> Equation Grapher </title>
+<!--=================================================--><style type="text/css">
+
+* { margin: 0; padding: 0 } 
+
+#canv { border: solid 1px black }
+
+/*------------------------------------------------------*/</style></head><body>
+
+<canvas id="canv" height="500" width="500"></canvas>
+
+<!--=========================================================--></body><script>
+
+var objCanv = document.getElementById('canv');
+var objDraw = objCanv.getContext('2d');
+
+window.onload = function()
+{
+  objDraw.fillStyle = 'black';
+
+  objDraw.fillRect(objCanv.width/2, 1, 1, objCanv.height); // vertical axis
+  objDraw.fillRect(1, objCanv.height/2, objCanv.width, 1); // horizontal axis
+
+  let x, y;
+
+  // Graph these equations...
+
+  Graph('Math.sin(x/80)*100', 'blue');
+  Graph('x ** 2 / 250',       'green');
+  Graph('Math.E ** (x / 20)', 'red');
+  Graph('1000 / x',           'cyan');
+  Graph('Math.cos(x/80)*100', 'yellow');
+  Graph('Math.tanh(x/80)*60', 'magenta');
+}
+
+function Graph(Xformula, Color) // graph equation point by point
+{
+  objDraw.fillStyle = Color;
+
+  for (x = -objCanv.width/2; x <= objCanv.width/2; x += 0.01)
+  {
+    y = eval(Xformula);
+    
+    objDraw.fillRect(x + objCanv.width/2, -y + objCanv.height/2, .2, .2);
+  }
+}
+
+/*-----------------------------------------------------------*/</script></html>
